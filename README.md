@@ -62,7 +62,7 @@ Clone the GitHub repository to your local machine:
 
 ```bash
 git clone https://github.com/kaveh-hooshmandi/rabo-ros2-odometry-control.git
-cd rabo-ros2-odometry-control
+cd rabo-ros2-odometry-control/src
 ```
 
 ### 2. . Install Dependencies & Build the ROS 2 Workspace
