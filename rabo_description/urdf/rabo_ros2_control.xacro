@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <!-- ros2_control block defining robot hardware and interfaces -->
+    <ros2_control name="rabotSystem" type="system">
+
+        <!-- ros2_control Gazebo plugin configuration -->
+
+        <!-- ROS 2 Humble uses Ignition -->
+        <xacro:if value="$(arg is_ignition)">
+            <hardware>
+                <plugin>ign_ros2_control/IgnitionSystem</plugin> <!-- Plugin for Ignition simulation -->
+            </hardware>
+        </xacro:if>
+
+        <!-- ROS 2 Iron or newer uses Gazebo Classic -->
+        <xacro:unless value="$(arg is_ignition)">
+            <hardware>
+                <plugin>gz_ros2_control/GazeboSimSystem</plugin> <!-- Plugin for Gazebo Sim -->
+            </hardware>
+        </xacro:unless>
+
+        <!-- Common ROS 2 Control Interfaces -->
+
+        <!-- Right wheel joint configuration -->
+        <joint name="wheel_right_joint">
+            <command_interface name="velocity">
+              <param name="min">-1</param> <!-- Minimum velocity command -->
+              <param name="max">1</param>  <!-- Maximum velocity command -->
+            </command_interface>
+            <state_interface name="position" /> <!-- Reports wheel position -->
+            <state_interface name="velocity" /> <!-- Reports wheel velocity -->
+        </joint>
+
+        <!-- Left wheel joint configuration -->
+        <joint name="wheel_left_joint">
+            <command_interface name="velocity">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+        
+    </ros2_control>
+
+</robot>
